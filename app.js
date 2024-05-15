@@ -56,3 +56,10 @@ app.post('/movies/', async (request, response) => {
   await db.run(addMovieQuery)
   response.send('Movie Successfully Added')
 })
+//API3
+app.get('/movies/:movieId/', async (req, res) => {
+  const {movieId} = req.params
+  const getMovieQuery = `SELECT * FROM movie WHERE movie_id = ${movieId}`
+  const movie = await db.get(getMovieQuery)
+  res.send(convertDbObjectToResponseObject(movie))
+})
